@@ -23,7 +23,8 @@ function getAdjacentStrings(grid: string[][], row: number, col: number, length: 
 
 function part1(grid: string[][]) {
 	return grid.reduce((acc1, row, i) => {
-		return acc1 + row.reduce((acc2, _, j) => {
+		return acc1 + row.reduce((acc2, cell, j) => {
+			if (cell !== 'X') return acc2;
 			const adj = getAdjacentStrings(grid, i, j, 4);
 			return acc2 + countOccurences(adj, 'XMAS');
 		}, 0);
@@ -32,7 +33,8 @@ function part1(grid: string[][]) {
 
 function part2(grid: string[][]) {
 	return grid.reduce((acc, row, i) => {
-		return acc + row.filter((_, j) => {
+		return acc + row.filter((cell, j) => {
+			if (cell !== 'A') return false;
 			const adj = getAdjacentStrings(grid, i, j, 2).filter((_, i) => i % 2 === 1);
 			return adj[0] !== adj[2] && countOccurences(adj, 'AM') == 2 && countOccurences(adj, 'AS') == 2;
 		}).length;
