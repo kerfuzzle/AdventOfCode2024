@@ -26,3 +26,12 @@ export function compareArray<T>(arr1: T[], arr2: T[]) {
 export function getMiddleElement<T>(arr: T[]) {
 	return arr[Math.floor(arr.length / 2)];
 }
+
+export function search2D<T>(grid: T[][], target: T): [number, number] {
+	const row = grid.findIndex(row => row.includes(target));
+	return [row, grid[row].indexOf(target)];
+}
+
+export function createEmpty2D<T>(rows: number, columns: number) {
+	return Array(rows).fill(undefined).map(_ => Array<undefined>(columns)) as T[][];
+}
