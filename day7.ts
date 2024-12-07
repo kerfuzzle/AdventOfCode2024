@@ -17,6 +17,6 @@ function getValidLineTotal(lines: string[], operators: ((a: number, b: number) =
 }
 
 const lines = readInput(7);
-const functions = [(a: number, b: number) => a + b, (a: number, b: number) => a * b, (a: number, b: number) => parseInt(a.toString() + b.toString())];
+const functions = [(a: number, b: number) => a + b, (a: number, b: number) => a * b, (a: number, b: number) => a * Math.pow(10, Math.floor(Math.log10(b)) + 1) + b];
 console.log(`Part 1: ${getValidLineTotal(lines, functions.slice(0, -1))}`);
 console.log(`Part 2: ${getValidLineTotal(lines, functions)}`);
