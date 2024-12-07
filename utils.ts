@@ -20,7 +20,7 @@ export function removeElements<T>(array: T[], index: number, amount = 1) {
 
 export function compareArray<T>(arr1: T[], arr2: T[]) {
 	if (arr1.length !== arr2.length) return false;
-	return !arr1.some((_, i) => arr1[i] !== arr2[i]);
+	return arr1.every((_, i) => arr1[i] === arr2[i]);
 }
 
 export function getMiddleElement<T>(arr: T[]) {
