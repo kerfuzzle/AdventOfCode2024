@@ -32,6 +32,14 @@ export function search2D<T>(grid: T[][], target: T): [number, number] {
 	return [row, grid[row].indexOf(target)];
 }
 
+export function *search2DIterator<T>(grid: T[][], predicate: (element: T, i: number, j: number) => boolean) {
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; j < grid[i].length; j++) {
+			if (predicate(grid[i][j], i, j)) yield { x: i, y: j, element: grid[i][j] };
+		}
+	}
+}
+
 export function createEmpty2D<T>(rows: number, columns: number) {
 	return Array(rows).fill(undefined).map(_ => Array<undefined>(columns)) as T[][];
 }
