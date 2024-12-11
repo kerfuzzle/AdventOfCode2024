@@ -49,3 +49,15 @@ export function reduce2D<T>(grid: T[][], callback: (acc: number, cell: T, row: n
 		return acc1 + row.reduce((acc2, cell, j) => callback(acc2, cell, i, j), 0);
 	}, 0);
 }
+
+export function memoize<Arguments extends unknown[], Result>(func: (...args: Arguments) => Result): (...args: Arguments) => Result {
+	const resultMap = new Map<string, Result>();
+	return (...args): Result => {
+		const argsJSON = JSON.stringify(args);
+		let result = resultMap.get(argsJSON);
+		if (result) return result;
+		result = func(...args);
+		resultMap.set(argsJSON, result);
+		return result;
+	};
+}
