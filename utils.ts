@@ -44,6 +44,10 @@ export function createEmpty2D<T>(rows: number, columns: number) {
 	return Array(rows).fill(undefined).map(_ => Array<undefined>(columns)) as T[][];
 }
 
+export function createFilled2D<T>(rows: number, columns: number, element: T) {
+	return Array(rows).fill(undefined).map(_ => Array(columns).fill(element) as T[]);
+}
+
 export function reduce2D<T>(grid: T[][], callback: (acc: number, cell: T, row: number, column: number) => number) {
 	return grid.reduce((acc1, row, i) => {
 		return acc1 + row.reduce((acc2, cell, j) => callback(acc2, cell, i, j), 0);
