@@ -35,12 +35,12 @@ class Machine {
 		const adj = getAdjugate(coeffMatrix);
 		const mult = multiplyMatrix(adj, this.target.map(t => t + offset) as Coordinate);
 		const result = mult.map(m => m / det);
-		if (result[0] % 1 === 0 && result[1] % 1 === 0 && result[0] >= 0 && result[1] >= 0 && result[0] <= max && result[1] <= max) return result[0] * 3 + result[1];
+		if (Number.isInteger(result[0]) && Number.isInteger(result[1]) && result[0] >= 0 && result[1] >= 0 && result[0] <= max && result[1] <= max) return result[0] * 3 + result[1];
 		return 0;
 	}
 }
 
 const machines = splitArray(readInput(13), '').map(machineString => new Machine(machineString));
 const pt1 = machines.reduce((acc, machine) => acc + machine.solve(100, 0), 0);
-const pt2 = machines.reduce((acc, machine) => acc + machine.solve(Infinity, 10 ** 13), 0);
+const pt2 = machines.reduce((acc, machine) => acc + machine.solve(Infinity, 1e13), 0);
 console.log(`Part 1: ${pt1}\nPart 2: ${pt2}`);
