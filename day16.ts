@@ -73,13 +73,11 @@ function dijkstras(grid: Node[][]) {
 	return end;
 }
 
-function part1(grid: Node[][]) {
-	const end = dijkstras(grid);
+function part1(end: Node) {
 	return end.bestCosts.values().toArray().toSorted()[0];
 }
 
-function part2(grid: Node[][]) {
-	const end = dijkstras(grid);
+function part2(end: Node) {
 	const bestCosts = end.bestCosts.entries().toArray().sort((a, b) => a[1] - b[1]);
 	const bestPathNodes = end.bestPaths.values().toArray()[bestCosts[0][0]];
 	const pathGrid = createFilled2D(grid.length, grid.length, '.');
@@ -94,4 +92,5 @@ const grid = readInput(16).map((line, i) => {
 	});
 });
 
-console.log(`Part 1: ${part1(grid)}\nPart 2: ${part2(grid)}`);
+const end = dijkstras(grid);
+console.log(`Part 1: ${part1(end)}\nPart 2: ${part2(end)}`);
