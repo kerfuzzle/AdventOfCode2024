@@ -65,3 +65,28 @@ export function memoize<Arguments extends unknown[], Result>(func: (...args: Arg
 		return result;
 	};
 }
+
+export class PriorityQueue<T> {
+	queue: T[];
+	sortingPredicate: (a: T, b: T) => number;
+
+	constructor(predicate: (a: T, b: T) => number, ...elements: T[]) {
+		this.sortingPredicate = predicate;
+		this.queue = elements;
+		this.queue.sort(this.sortingPredicate);
+	}
+
+	enqueue(element: T) {
+		this.queue.push(element);
+		this.queue.sort(this.sortingPredicate);
+	}
+
+	dequeue() {
+		if (this.queue.length === 0) return undefined;
+		return this.queue.shift();
+	}
+
+	length() {
+		return this.queue.length;
+	}
+}
