@@ -54,6 +54,12 @@ export function reduce2D<T>(grid: T[][], callback: (acc: number, cell: T, row: n
 	}, 0);
 }
 
+export function reduce2DToArray<T, S>(grid: T[][], callback: (acc: S[], cell: T, row: number, column: number) => S[]): S[] {
+	return grid.reduce((acc1, row, i) => {
+		return acc1.concat(row.reduce((acc2, cell, j) => callback(acc2, cell, i, j), [] as S[]));
+	}, [] as S[]);
+}
+
 export function memoize<Arguments extends unknown[], Result>(func: (...args: Arguments) => Result): (...args: Arguments) => Result {
 	const resultMap = new Map<string, Result>();
 	return (...args): Result => {
