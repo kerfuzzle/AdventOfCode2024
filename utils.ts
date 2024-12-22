@@ -60,6 +60,12 @@ export function reduce2DToArray<T, S>(grid: T[][], callback: (acc: S[], cell: T,
 	}, [] as S[]);
 }
 
+export function *arrayWindows<T>(array: T[], size: number) {
+	for (let i = 0; i <= array.length - size; i++) {
+		yield array.slice(i, i + size);
+	}
+}
+
 export function memoize<Arguments extends unknown[], Result>(func: (...args: Arguments) => Result): (...args: Arguments) => Result {
 	const resultMap = new Map<string, Result>();
 	return (...args): Result => {
